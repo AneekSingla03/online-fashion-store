@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cat-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .cat-hero-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+      text-decoration: none;
+    }
+
+    .cat-hero-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .cat-hero-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .cat-hero-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 55%);
+    }
+
+    .cat-hero-main {
+      min-height: 360px;
+    }
+
+    .cat-hero-small {
+      min-height: 220px;
+    }
+
+    .cat-hero-label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cat-hero-label h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cat-hero-label p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .cat-hero-label .btn {
+      margin-top: 12px;
+      display: inline-block;
+    }
+
+    .cat-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+    }
+
+    .sub-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .sub-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      text-align: center;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .sub-card:hover {
+      border-color: var(--rust);
+      background: var(--sand);
+    }
+
+    .sub-card-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .sub-card-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .sub-card-count {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div class="page-banner">
+    <div class="container">
+      <div class="page-banner-title">All <em style="color:var(--rust);">Categories</em></div>
+      <p class="page-banner-sub">Find your perfect style</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="cat-hero-grid">
+        <a href="products.html?cat=women" class="cat-hero-card cat-hero-main">
+          <div class="cat-fallback">👗</div>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700&q=75" alt="Women"
+            onerror="this.remove()">
+          <div class="cat-hero-label">
+            <h2>Women</h2>
+            <p>2,400+ Styles</p><span class="btn btn-primary btn-sm">Shop Now →</span>
+          </div>
+        </a>
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <a href="products.html?cat=men" class="cat-hero-card cat-hero-small">
+            <div class="cat-fallback">👔</div>
+            <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=700&q=75" alt="Men"
+              onerror="this.remove()">
+            <div class="cat-hero-label">
+              <h2>Men</h2>
+              <p>1,800+ Styles</p>
+            </div>
+          </a>
+          <a href="products.html?cat=kids" class="cat-hero-card cat-hero-small">
+            <div class="cat-fallback">🧒</div>
+            <img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=700&q=75" alt="Kids"
+              onerror="this.remove()">
+            <div class="cat-hero-label">
+              <h2>Kids</h2>
+              <p>900+ Styles</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:52px;">
+        <a href="products.html?cat=ethnic" class="cat-hero-card cat-hero-small">
+          <div class="cat-fallback">🥻</div>
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=700&q=75" alt="Ethnic"
+            onerror="this.remove()">
+          <div class="cat-hero-label">
+            <h2>Ethnic Wear</h2>
+            <p>1,200+ Styles</p><span class="btn btn-primary btn-sm">Shop Now →</span>
+          </div>
+        </a>
+        <a href="products.html?cat=sports" class="cat-hero-card cat-hero-small">
+          <div class="cat-fallback">🏋️</div>
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=75" alt="Sports"
+            onerror="this.remove()">
+          <div class="cat-hero-label">
+            <h2>Sports &amp; Active</h2>
+            <p>600+ Styles</p><span class="btn btn-primary btn-sm">Shop Now →</span>
+          </div>
+        </a>
+      </div>
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Shop by <em>Sub-Category</em></h2>
+        </div>
+      </div>
+      <div class="sub-cat-grid">
+        <a href="products.html?cat=women" class="sub-card">
+          <div class="sub-card-icon">👗</div>
+          <div class="sub-card-name">Dresses</div>
+          <div class="sub-card-count">342 items</div>
+        </a>
+        <a href="products.html?cat=women" class="sub-card">
+          <div class="sub-card-icon">🥻</div>
+          <div class="sub-card-name">Sarees</div>
+          <div class="sub-card-count">218 items</div>
+        </a>
+        <a href="products.html?cat=women" class="sub-card">
+          <div class="sub-card-icon">👚</div>
+          <div class="sub-card-name">Tops &amp; Tees</div>
+          <div class="sub-card-count">567 items</div>
+        </a>
+        <a href="products.html?cat=women" class="sub-card">
+          <div class="sub-card-icon">👖</div>
+          <div class="sub-card-name">Jeans &amp; Pants</div>
+          <div class="sub-card-count">312 items</div>
+        </a>
+        <a href="products.html?cat=men" class="sub-card">
+          <div class="sub-card-icon">👔</div>
+          <div class="sub-card-name">Formal Shirts</div>
+          <div class="sub-card-count">445 items</div>
+        </a>
+        <a href="products.html?cat=men" class="sub-card">
+          <div class="sub-card-icon">🧥</div>
+          <div class="sub-card-name">Jackets</div>
+          <div class="sub-card-count">189 items</div>
+        </a>
+        <a href="products.html?cat=ethnic" class="sub-card">
+          <div class="sub-card-icon">🤵</div>
+          <div class="sub-card-name">Sherwanis</div>
+          <div class="sub-card-count">143 items</div>
+        </a>
+        <a href="products.html?cat=kids" class="sub-card">
+          <div class="sub-card-icon">🎒</div>
+          <div class="sub-card-name">School Wear</div>
+          <div class="sub-card-count">234 items</div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('categories.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+  </script>
+</body>
+
+</html>

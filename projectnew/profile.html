@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .profile-sidebar {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 28px;
+      position: sticky;
+      top: 80px;
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--rust);
+      margin: 0 auto 14px;
+    }
+
+    .profile-menu {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .profile-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: var(--transition);
+      margin-bottom: 4px;
+    }
+
+    .profile-menu a:hover,
+    .profile-menu a.active {
+      background: var(--sand);
+      color: var(--ink);
+    }
+
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .profile-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .order-row-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      background: var(--sand);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+    }
+
+    .order-row-item-img {
+      width: 56px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      background: var(--border);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .order-row-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media(max-width:900px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-sidebar {
+        position: static;
+      }
+
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div class="page-banner">
+    <div class="container">
+      <div class="page-banner-title">My <em style="color:var(--rust);">Account</em></div>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="profile-layout">
+        <aside class="profile-sidebar">
+          <div class="profile-avatar" id="profile-avatar-letter">U</div>
+          <div style="font-family:var(--font-display);font-size:18px;font-weight:700;" id="profile-name-display">User
+          </div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px;" id="profile-email-display">—</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;" id="profile-joined">—</div>
+          <div class="profile-menu">
+            <a href="#" class="active" onclick="showTab('details',this)">👤 My Details</a>
+            <a href="#" onclick="showTab('orders',this)">📦 Orders</a>
+            <a href="wishlist.html">♡ Wishlist</a>
+            <a href="#" onclick="showTab('addresses',this)">📍 Addresses</a>
+            <a href="#" onclick="logoutUser()" style="color:var(--rust);">🚪 Logout</a>
+          </div>
+        </aside>
+        <div>
+          <!-- DETAILS TAB -->
+          <div class="profile-card" id="tab-details">
+            <h3>Personal Information</h3>
+            <form onsubmit="handleProfileUpdate(event)">
+              <div class="form-grid-2">
+                <div class="form-group"><label class="form-label">Full Name</label><input class="form-input"
+                    id="profile-name" placeholder="Your Name"></div>
+                <div class="form-group"><label class="form-label">Email</label><input class="form-input"
+                    id="profile-email" type="email" readonly style="background:var(--sand);"></div>
+              </div>
+              <div class="form-group"><label class="form-label">Phone Number</label><input class="form-input"
+                  id="profile-phone" placeholder="+91 98765 43210"></div>
+              <div class="form-group"><label class="form-label">Default Address</label><textarea class="form-textarea"
+                  id="profile-address" rows="3" placeholder="123, Main Street, City - 400001"></textarea></div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+          <!-- ORDERS TAB -->
+          <div class="profile-card" id="tab-orders" style="display:none;">
+            <h3>My Orders</h3>
+            <div id="orders-list"></div>
+          </div>
+          <!-- ADDRESSES TAB -->
+          <div class="profile-card" id="tab-addresses" style="display:none;">
+            <h3>Saved Addresses</h3>
+            <div style="text-align:center;padding:40px;color:var(--muted);">
+              <div style="font-size:36px;margin-bottom:12px;">📍</div>
+              <p>No saved addresses yet.</p>
+              <button class="btn btn-outline btn-sm" style="margin-top:14px;">+ Add New Address</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('profile.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    renderProfile();
+    // Demo orders
+    document.getElementById('orders-list').innerHTML = PRODUCTS.slice(0, 3).map((p, i) => `
+  <div class="order-row-item">
+    <div class="order-row-item-img"><img src="${p.img}" alt="" onerror="this.parentNode.style.background=p.color;this.remove()"></div>
+    <div style="flex:1;"><div style="font-weight:600;font-size:14px;">${p.name}</div><div style="font-size:12px;color:var(--muted);margin-top:3px;">Order #SH2025${i + 1} • ${new Date(Date.now() - (i + 1) * 7 * 86400000).toLocaleDateString('en-IN')}</div></div>
+    <span class="tag tag-green">Delivered</span>
+  </div>`).join('') || '<p style="color:var(--muted);text-align:center;">No orders yet.</p>';
+
+    function showTab(name, link) {
+      ['details', 'orders', 'addresses'].forEach(t => { const el = document.getElementById('tab-' + t); if (el) el.style.display = 'none'; });
+      document.getElementById('tab-' + name).style.display = 'block';
+      document.querySelectorAll('.profile-menu a').forEach(a => a.classList.remove('active'));
+      if (link) link.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>

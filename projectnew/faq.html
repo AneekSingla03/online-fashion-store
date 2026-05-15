@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .faq-nav {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 24px;
+      position: sticky;
+      top: 80px;
+    }
+
+    .faq-nav h3 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-nav-link {
+      display: block;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: var(--transition);
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .faq-nav-link:hover,
+    .faq-nav-link.active {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .faq-section {
+      margin-bottom: 44px;
+    }
+
+    .faq-section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--rust);
+      display: inline-block;
+    }
+
+    .faq-item {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item.open {
+      border-color: var(--ink);
+    }
+
+    .faq-question {
+      padding: 16px 20px;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--white);
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: var(--sand);
+    }
+
+    .faq-item.open .faq-question {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .faq-icon {
+      font-size: 18px;
+      font-weight: 300;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.3s ease;
+      background: var(--white);
+    }
+
+    .faq-answer.open {
+      max-height: 400px;
+    }
+
+    .faq-answer-inner {
+      padding: 16px 20px 20px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-answer-inner a {
+      color: var(--rust);
+      font-weight: 600;
+    }
+
+    .faq-search-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    .faq-search-box h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .faq-search-wrap {
+      position: relative;
+    }
+
+    .faq-search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: var(--font-body);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .faq-search-input:focus {
+      border-color: var(--ink);
+    }
+
+    .faq-search-ico {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .contact-cta {
+      background: var(--ink);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      color: #fff;
+      margin-top: 40px;
+    }
+
+    .contact-cta h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .contact-cta p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    @media(max-width:900px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-nav {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="navbar-mount"></div>
+  <div class="page-banner">
+    <div class="container">
+      <div class="breadcrumb" style="color:rgba(255,255,255,0.5);">
+        <a href="index.html" style="color:rgba(255,255,255,0.5);">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span style="color:#fff;">FAQ</span>
+      </div>
+      <div class="page-banner-title">Frequently Asked <em style="color:var(--rust);">Questions</em></div>
+      <p class="page-banner-sub">Everything you need to know about StyleHub</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-layout">
+
+        <!-- SIDEBAR NAV -->
+        <aside class="faq-nav">
+          <h3>Topics</h3>
+          <span class="faq-nav-link active" onclick="scrollToSection('orders')">📦 Orders</span>
+          <span class="faq-nav-link" onclick="scrollToSection('shipping')" id="shipping">🚚 Shipping</span>
+          <span class="faq-nav-link" onclick="scrollToSection('returns')" id="returns">🔄 Returns</span>
+          <span class="faq-nav-link" onclick="scrollToSection('payment')">💳 Payment</span>
+          <span class="faq-nav-link" onclick="scrollToSection('account')">👤 Account</span>
+          <span class="faq-nav-link" onclick="scrollToSection('sizing')">📏 Sizing</span>
+          <span class="faq-nav-link" onclick="scrollToSection('products')">🛍️ Products</span>
+          <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);">
+            <a href="contact.html" class="btn btn-outline btn-full btn-sm">Contact Support →</a>
+          </div>
+        </aside>
+
+        <!-- FAQ CONTENT -->
+        <div>
+          <!-- SEARCH -->
+          <div class="faq-search-box">
+            <h3>What can we help you with?</h3>
+            <div class="faq-search-wrap">
+              <span class="faq-search-ico">🔍</span>
+              <input class="faq-search-input" type="text" placeholder="Search questions..."
+                oninput="searchFAQ(this.value)">
+            </div>
+          </div>
+
+          <!-- ORDERS -->
+          <div class="faq-section" id="orders">
+            <div class="faq-section-title">📦 Orders</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I place an order?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Simply browse our products, select your size, click "Add to Cart", and
+                    proceed to checkout. You can pay via UPI, credit/debit card, or Cash on Delivery. You'll receive a
+                    confirmation email once your order is placed.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Can I modify or cancel my order?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">You can cancel or modify your order within 2 hours of placing it. After
+                    that, if the order is already shipped, you'll need to follow the return process. Contact us at <a
+                      href="contact.html">support@stylehub.in</a> immediately.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I track my order?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Once your order is shipped, you'll receive an SMS and email with a
+                    tracking number and link. You can also track your order by logging into your account and visiting
+                    the "My Orders" section under your profile.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">What if I receive a wrong or damaged item?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">We're sorry for the inconvenience! Please contact us within 48 hours of
+                    delivery with your order ID and a photo of the item. We'll arrange an immediate replacement or full
+                    refund — no questions asked.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Can I place a bulk or wholesale order?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Yes! For bulk orders (10+ items), please reach out to us at <a
+                      href="contact.html">our B2B page</a> or email business@stylehub.in. We offer special pricing and
+                    customization for corporate and wholesale orders.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SHIPPING -->
+          <div class="faq-section" id="shipping-section">
+            <div class="faq-section-title">🚚 Shipping & Delivery</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How long does delivery take?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Standard delivery takes 3–5 business days. Express delivery (1–2 days)
+                    is available for metro cities at an additional charge of ₹99. Delivery times may vary during peak
+                    seasons and festivals.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Is shipping free?<span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Yes! Shipping is completely free on all orders above ₹999. For orders
+                    below ₹999, a nominal shipping charge of ₹99 applies. You can always add more items to your cart to
+                    qualify for free shipping.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Do you deliver outside India?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Currently, StyleHub delivers only within India to 500+ cities and towns.
+                    We're working on international shipping and hope to launch it soon. Stay tuned!</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">What if I'm not available to receive my order?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Our delivery partner will attempt delivery up to 3 times. You can also
+                    reschedule delivery by contacting the courier directly using the tracking link. Alternatively, you
+                    can pick it up from the nearest delivery hub.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RETURNS -->
+          <div class="faq-section" id="returns-section">
+            <div class="faq-section-title">🔄 Returns & Exchanges</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">What is your return policy?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">We offer hassle-free returns within 30 days of delivery. The item must
+                    be unworn, unwashed, and in original packaging with tags attached. Some items like innerwear and
+                    customized products are not eligible for return.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I initiate a return or exchange?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Log into your account → My Orders → Select the item → Click
+                    "Return/Exchange". Fill in the reason and submit. A pickup will be scheduled within 2–3 business
+                    days. Refunds are processed within 5–7 working days after pickup.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How long does the refund take?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Once we receive and inspect the returned item, refunds are processed
+                    within 5–7 business days. The amount is credited to your original payment method — UPI/bank account
+                    (2–3 days), card (5–7 days), or as StyleHub wallet credits (instant).</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Can I exchange for a different size or color?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Yes! Exchanges for different sizes or colors are free of charge, subject
+                    to availability. If the requested item is out of stock, we'll issue a full refund or store credit.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAYMENT -->
+          <div class="faq-section" id="payment">
+            <div class="faq-section-title">💳 Payment</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">What payment methods do you accept?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">We accept all major payment methods: UPI (Google Pay, PhonePe, Paytm),
+                    credit/debit cards (Visa, Mastercard, RuPay), net banking, and Cash on Delivery (COD) for orders up
+                    to ₹10,000.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Is my payment information secure?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Absolutely. All transactions are encrypted using 256-bit SSL technology.
+                    We never store your card details on our servers. Our payment gateway is PCI-DSS compliant and
+                    certified by leading security auditors.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Do you have EMI options?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Yes! EMI is available on orders above ₹3,000 through select credit cards
+                    (HDFC, ICICI, SBI, Axis) for 3, 6, and 12 month tenures. No-cost EMI is available on select products
+                    during promotional periods.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">My payment failed but money was deducted. What
+                  should I do?<span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Don't worry! If a payment fails after being deducted, the amount is
+                    automatically reversed to your account within 5–7 business days by your bank. If not, email us at
+                    support@stylehub.in with your transaction ID and we'll resolve it immediately.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCOUNT -->
+          <div class="faq-section" id="account">
+            <div class="faq-section-title">👤 Account & Profile</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Do I need an account to shop?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">You can browse and add items to your cart without an account. However,
+                    to complete a purchase, you'll need to create a free account or log in. This helps us save your
+                    order history, addresses, and preferences.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I reset my password?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Click "Forgot Password?" on the login page. Enter your registered email
+                    address and we'll send you a password reset link. The link is valid for 24 hours. Check your spam
+                    folder if you don't see the email.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I delete my account?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">We're sad to see you go! To delete your account, please contact us at
+                    support@stylehub.in with your registered email. We'll process the request within 7 business days.
+                    Note: Order history and pending refunds must be resolved before deletion.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIZING -->
+          <div class="faq-section" id="sizing">
+            <div class="faq-section-title">📏 Sizing & Fit</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I find my correct size?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Each product page has a detailed Size Guide tab with chest, waist, and
+                    hip measurements. We recommend measuring yourself with a measuring tape and comparing with our size
+                    chart. When in doubt, size up — you can always exchange for a better fit.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Do your clothes run true to size?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Most of our products are true to size. However, this can vary by brand
+                    and fabric type. We recommend checking customer reviews for size feedback, as many shoppers mention
+                    if items run small or large.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Do you offer plus sizes?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Yes! We believe fashion is for everybody. We offer sizes from XS to XXXL
+                    (and up to 3XL for select categories). Use the size filter on the products page to browse items
+                    available in your size.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRODUCTS -->
+          <div class="faq-section" id="products">
+            <div class="faq-section-title">🛍️ Products & Quality</div>
+            <div class="faq-items-wrap">
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">Are all products authentic and original?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">100% yes! We source directly from verified brands and manufacturers.
+                    Every product listed on StyleHub passes our quality check before it's made available to customers.
+                    We have a zero-tolerance policy for counterfeit goods.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I wash and care for my clothes?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">Each garment comes with a care label inside. General tips: machine wash
+                    on gentle cycle for cottons, hand wash for delicates and ethnic wear, dry-clean only for silk sarees
+                    and sherwanis. Avoid direct sunlight for colored fabrics.</div>
+                </div>
+              </div>
+              <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">How do I use a coupon or promo code?<span
+                    class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">On the Cart page, you'll find a "Have a coupon?" section. Enter your
+                    code and click "Apply". The discount will be reflected in your order total. Only one coupon can be
+                    applied per order. Try code <b>STYLE20</b> for 20% off!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTACT CTA -->
+          <div class="contact-cta">
+            <h3>Still have questions?</h3>
+            <p>Our support team is available Monday–Saturday, 10am–7pm to help you.</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+              <a href="contact.html" class="btn btn-secondary">📧 Email Us</a>
+              <a href="tel:+919876543210" class="btn btn-outline"
+                style="color:#fff;border-color:rgba(255,255,255,0.3);">📞 Call Us</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('faq.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+
+    function toggleFAQ(questionEl) {
+      const item = questionEl.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+      });
+      // Open clicked (if wasn't open)
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+      }
+    }
+
+    function scrollToSection(id) {
+      const map = { shipping: 'shipping-section', returns: 'returns-section' };
+      const target = document.getElementById(map[id] || id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.faq-nav-link').forEach(l => l.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+
+    function searchFAQ(query) {
+      const q = query.toLowerCase().trim();
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const text = item.querySelector('.faq-question').textContent.toLowerCase()
+          + (item.querySelector('.faq-answer-inner')?.textContent.toLowerCase() || '');
+        item.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+      // Show/hide section headings based on visible items
+      document.querySelectorAll('.faq-section').forEach(sec => {
+        const visible = [...sec.querySelectorAll('.faq-item')].some(i => i.style.display !== 'none');
+        sec.style.display = visible ? '' : 'none';
+      });
+    }
+
+    // Open section from URL hash (e.g. faq.html#shipping)
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setTimeout(() => scrollToSection(hash), 300);
+    }
+  </script>
+</body>
+
+</html>

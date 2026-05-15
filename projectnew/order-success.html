@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Placed! – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .success-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      margin: 0 auto 24px;
+    }
+
+    .success-wrap h1 {
+      font-family: var(--font-display);
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .success-wrap p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .order-info-box {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .order-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .order-info-row:last-child {
+      margin-bottom: 0;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <section class="section">
+    <div class="container">
+      <div class="success-wrap">
+        <div class="success-icon">🎉</div>
+        <h1>Order Placed!</h1>
+        <p>Thank you for shopping with StyleHub. Your order has been confirmed and will be delivered in 3–5 business
+          days.</p>
+        <div class="order-info-box" id="order-info">
+          <div class="order-info-row"><span>Order ID</span><span id="oi-id">—</span></div>
+          <div class="order-info-row"><span>Items</span><span id="oi-items">—</span></div>
+          <div class="order-info-row"><span>Estimated Delivery</span><span id="oi-eta">—</span></div>
+          <div class="order-info-row"><span style="font-weight:700;">Total Paid</span><span id="oi-total"
+              style="color:var(--rust);">—</span></div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <a href="index.html" class="btn btn-primary btn-lg">Continue Shopping</a>
+          <a href="profile.html" class="btn btn-ghost btn-lg">View Orders</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    const order = JSON.parse(localStorage.getItem('sh_last_order') || '{}');
+    if (order.orderId) {
+      document.getElementById('oi-id').textContent = order.orderId;
+      document.getElementById('oi-items').textContent = order.items + ' item(s)';
+      document.getElementById('oi-total').textContent = '₹' + Number(order.total || 0).toLocaleString();
+      const eta = new Date(); eta.setDate(eta.getDate() + 4);
+      document.getElementById('oi-eta').textContent = eta.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+  </script>
+</body>
+
+</html>

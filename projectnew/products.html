@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .filter-sidebar {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 24px;
+      position: sticky;
+      top: 80px;
+    }
+
+    .filter-sidebar h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-section {
+      margin-bottom: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .filter-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-cat-btn {
+      text-align: left;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: var(--transition);
+      background: none;
+      border: 1.5px solid transparent;
+    }
+
+    .filter-cat-btn:hover,
+    .filter-cat-btn.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .price-range-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .price-range-row b {
+      color: var(--ink);
+    }
+
+    .sort-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sort-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sort-select {
+      padding: 8px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--font-body);
+      outline: none;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .search-input-bar {
+      padding: 8px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--font-body);
+      outline: none;
+      width: 200px;
+      transition: var(--transition);
+    }
+
+    .search-input-bar:focus {
+      border-color: var(--ink);
+    }
+
+    @media(max-width:900px) {
+      .shop-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-sidebar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div id="marquee-mount"></div>
+
+  <!-- PAGE BANNER -->
+  <div class="page-banner">
+    <div class="container">
+      <div class="breadcrumb" style="color:rgba(255,255,255,0.5);">
+        <a href="index.html" style="color:rgba(255,255,255,0.5);">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span style="color:#fff;">Shop</span>
+      </div>
+      <div class="page-banner-title">Our <em style="color:var(--rust);">Collection</em></div>
+      <p class="page-banner-sub">Discover styles for every occasion</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="shop-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="filter-sidebar">
+          <h3>Filters</h3>
+          <div class="filter-section">
+            <div class="filter-section-title">Category</div>
+            <div class="filter-btn-group">
+              <button class="filter-cat-btn" data-cat-btn="all" onclick="setCategory('all')">All Products</button>
+              <button class="filter-cat-btn" data-cat-btn="women" onclick="setCategory('women')">👗 Women</button>
+              <button class="filter-cat-btn" data-cat-btn="men" onclick="setCategory('men')">👔 Men</button>
+              <button class="filter-cat-btn" data-cat-btn="kids" onclick="setCategory('kids')">🧒 Kids</button>
+              <button class="filter-cat-btn" data-cat-btn="ethnic" onclick="setCategory('ethnic')">🥻 Ethnic</button>
+              <button class="filter-cat-btn" data-cat-btn="sports" onclick="setCategory('sports')">🏋️ Sports</button>
+            </div>
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-title">Price Range</div>
+            <div class="price-range-row">
+              <span>₹0</span>
+              <span>Max: <b id="price-display">₹15,000</b></span>
+            </div>
+            <input type="range" class="price-slider" min="0" max="15000" step="100" value="15000" id="price-range"
+              oninput="filterState.maxPrice=+this.value;document.getElementById('price-display').textContent='₹'+Number(this.value).toLocaleString();renderFilteredProducts();">
+          </div>
+          <div class="filter-section">
+            <div class="filter-section-title">Sub-category</div>
+            <div class="filter-bar" id="filter-chips" style="flex-direction:column;gap:6px;"></div>
+          </div>
+          <button class="btn btn-outline btn-full btn-sm" onclick="resetFilters()" style="margin-top:4px;">Reset All
+            Filters</button>
+        </aside>
+
+        <!-- MAIN -->
+        <div>
+          <div class="sort-bar">
+            <div>
+              <span id="product-count" style="font-size:14px;color:var(--muted);"></span>
+            </div>
+            <div class="sort-right">
+              <input class="search-input-bar" type="text" placeholder="🔍 Search products..." id="filter-search"
+                oninput="setSearch(this.value)">
+              <select class="sort-select" id="sort-select" onchange="setSort(this.value)">
+                <option value="popular">Most Popular</option>
+                <option value="newest">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="discount">Biggest Discount</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-bar" id="sub-chips" style="margin-bottom:20px;"></div>
+          <div class="product-grid" id="product-grid"></div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <div id="cart-sidebar-mount"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/filter.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('products.html');
+    document.getElementById('marquee-mount').innerHTML = buildMarquee();
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    document.getElementById('cart-sidebar-mount').innerHTML = buildCartSidebar();
+
+    // Init filters from URL
+    initFiltersFromURL();
+
+    // Also render sub-chips in separate element
+    function renderFilterChips(containerId = 'filter-chips') {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const chips = SUB_CATEGORIES[filterState.cat] || SUB_CATEGORIES.all;
+      container.innerHTML = chips.map(c =>
+        `<button class="filter-chip${filterState.sub === c || (c === 'All' && !filterState.sub) ? ' active' : ''}"
+      onclick="setSub('${c === 'All' ? '' : c}')">${c}</button>`
+      ).join('');
+    }
+    renderFilterChips();
+  </script>
+</body>
+
+</html>

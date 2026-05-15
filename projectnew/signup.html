@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-wrap {
+      min-height: calc(100vh - 130px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: var(--sand);
+    }
+
+    .auth-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 40px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .auth-logo span {
+      color: var(--rust);
+    }
+
+    .auth-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      color: var(--muted);
+    }
+
+    .auth-switch a {
+      color: var(--rust);
+      font-weight: 600;
+    }
+
+    .pass-toggle {
+      position: relative;
+    }
+
+    .pass-toggle input {
+      padding-right: 44px;
+    }
+
+    .pass-eye {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .strength-bar {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 6px;
+      transition: 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">Style<span>Hub</span></div>
+      <div class="auth-subtitle">Create your account — it's free!</div>
+      <form onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" id="signup-name" type="text" placeholder="Priya Sharma" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="signup-email" type="email" placeholder="priya@example.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="pass-toggle">
+            <input class="form-input" id="signup-pass" type="password" placeholder="Min 6 characters"
+              oninput="checkStrength(this.value)" required>
+            <span class="pass-eye" onclick="togglePass('signup-pass',this)">👁</span>
+          </div>
+          <div class="strength-bar" id="strength-bar" style="background:var(--border);width:0%"></div>
+          <div class="form-hint" id="strength-label"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <div class="pass-toggle">
+            <input class="form-input" id="signup-confirm" type="password" placeholder="Re-enter password" required>
+            <span class="pass-eye" onclick="togglePass('signup-confirm',this)">👁</span>
+          </div>
+        </div>
+        <label class="form-check" style="margin-bottom:20px;">
+          <input type="checkbox" id="terms-check" required>
+          <span class="form-check-label">I agree to the <a href="#" style="color:var(--rust);">Terms</a> &amp; <a
+              href="#" style="color:var(--rust);">Privacy Policy</a></span>
+        </label>
+        <button type="submit" class="btn btn-secondary btn-full btn-lg">Create Account →</button>
+      </form>
+      <div class="auth-switch">Already have an account? <a href="login.html">Sign In</a></div>
+    </div>
+  </div>
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('signup.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    function togglePass(id, eye) {
+      const inp = document.getElementById(id);
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      eye.textContent = inp.type === 'password' ? '👁' : '🙈';
+    }
+    function checkStrength(val) {
+      const bar = document.getElementById('strength-bar');
+      const label = document.getElementById('strength-label');
+      let score = 0;
+      if (val.length >= 6) score++;
+      if (val.length >= 10) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+      const levels = [
+        { w: '20%', c: '#d32f2f', l: 'Very Weak' },
+        { w: '40%', c: '#f57c00', l: 'Weak' },
+        { w: '60%', c: '#fbc02d', l: 'Fair' },
+        { w: '80%', c: '#388e3c', l: 'Strong' },
+        { w: '100%', c: '#1b5e20', l: 'Very Strong' }
+      ];
+      const lv = levels[Math.min(score - 1, 4)] || levels[0];
+      bar.style.width = lv.w; bar.style.background = lv.c;
+      label.textContent = val ? lv.l : '';
+    }
+  </script>
+</body>
+
+</html>

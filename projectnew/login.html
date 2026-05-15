@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-wrap {
+      min-height: calc(100vh - 130px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: var(--sand);
+    }
+
+    .auth-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .auth-logo span {
+      color: var(--rust);
+    }
+
+    .auth-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth-divider span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .auth-switch {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      color: var(--muted);
+    }
+
+    .auth-switch a {
+      color: var(--rust);
+      font-weight: 600;
+    }
+
+    .pass-toggle {
+      position: relative;
+    }
+
+    .pass-toggle input {
+      padding-right: 44px;
+    }
+
+    .pass-eye {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">Style<span>Hub</span></div>
+      <div class="auth-subtitle">Welcome back! Sign in to continue.</div>
+      <div id="login-alert"></div>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="login-email" type="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="pass-toggle">
+            <input class="form-input" id="login-pass" type="password" placeholder="••••••••" required>
+            <span class="pass-eye" onclick="togglePass('login-pass',this)">👁</span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <label class="form-check"><input type="checkbox">
+            <span class="form-check-label">Remember me</span>
+          </label>
+          <a href="#" style="font-size:13px;color:var(--rust);">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In →</button>
+      </form>
+      <div class="auth-divider"><span>or continue with</span></div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost btn-full" onclick="showToast('Google login coming soon!')">🔵 Google</button>
+        <button class="btn btn-ghost btn-full" onclick="showToast('Facebook login coming soon!')">🔷 Facebook</button>
+      </div>
+      <div class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></div>
+    </div>
+  </div>
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('login.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    function togglePass(id, eye) {
+      const inp = document.getElementById(id);
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+      eye.textContent = inp.type === 'password' ? '👁' : '🙈';
+    }
+  </script>
+</body>
+
+</html>

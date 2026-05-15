@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .about-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 72px 0;
+    }
+
+    .about-hero-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--sand);
+      position: relative;
+    }
+
+    .about-hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-big {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1.5px solid var(--border);
+    }
+
+    .value-icon {
+      font-size: 36px;
+      margin-bottom: 14px;
+    }
+
+    .value-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .team-card {
+      text-align: center;
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .team-name {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .team-role {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .stats-band {
+      background: var(--ink);
+      color: #fff;
+      padding: 52px 48px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      text-align: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .stat-n {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-l {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 4px;
+    }
+
+    @media(max-width:900px) {
+      .about-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .values-grid,
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+  <div class="page-banner">
+    <div class="container">
+      <div class="page-banner-title">About <em style="color:var(--rust);">StyleHub</em></div>
+      <p class="page-banner-sub">Fashion with purpose, style with soul</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-hero">
+        <div>
+          <div class="about-big">We're Building the Future of <em style="color:var(--rust);">Fashion</em></div>
+          <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-bottom:20px;">StyleHub was founded in 2026
+            with a simple mission: make fashion accessible, sustainable, and joyful for everyone in India.</p>
+          <p style="font-size:15px;line-height:1.8;color:var(--muted);">From a small team of 4 in Chitkara University, we've grown
+            to serve over few customers across the country, offering 15,000+ styles across women's, men's,
+            kids', ethnic, and sports fashion.</p>
+        </div>
+        <div class="about-hero-img">
+          <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=700&q=75" alt="About StyleHub"
+            onerror="this.parentNode.style.background='var(--sand)'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band" id="press">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-n">1.2M+</div>
+        <div class="stat-l">Happy Customers</div>
+      </div>
+      <div>
+        <div class="stat-n">15K+</div>
+        <div class="stat-l">Products</div>
+      </div>
+      <div>
+        <div class="stat-n">500+</div>
+        <div class="stat-l">Brand Partners</div>
+      </div>
+      <div>
+        <div class="stat-n">50+</div>
+        <div class="stat-l">Cities Served</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="background:var(--sand);">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Our <em>Values</em></h2>
+        </div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">♻️</div>
+          <h3>Sustainability</h3>
+          <p>We partner with eco-conscious brands and use sustainable packaging for every order.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Inclusivity</h3>
+          <p>Fashion is for everyone. We offer sizes XS–XXXL and styles for every body and occasion.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">✨</div>
+          <h3>Quality First</h3>
+          <p>Every product is quality-checked before shipping. We stand behind everything we sell.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🚀</div>
+          <h3>Fast Delivery</h3>
+          <p>Express delivery to 50+ cities. Free shipping on all orders above ₹999.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💬</div>
+          <h3>Customer Love</h3>
+          <p>24/7 support team ready to help. 30-day returns, no questions asked.</p>
+        </div>
+        <div class="value-card" id="sustainability">
+          <div class="value-icon">🇮🇳</div>
+          <h3>Made in India</h3>
+          <p>70% of our products are sourced from Indian artisans and weavers, supporting local craft.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Meet the <em>Team</em></h2>
+        </div>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar" style="background:#c9622f;">A</div>
+          <div class="team-name">Abhinav Goyal</div>
+          <div class="team-role">CEO & Co-Founder</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#8e24aa;">A</div>
+          <div class="team-name">Aneek Singla</div>
+          <div class="team-role">Head of Design</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#1565c0;">V</div>
+          <div class="team-name">Vansh Singla</div>
+          <div class="team-role">CTO</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#2e7d32;">D</div>
+          <div class="team-name">Diya Garg</div>
+          <div class="team-role">Head of Marketing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('about.html');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+  </script>
+</body>
+
+</html>

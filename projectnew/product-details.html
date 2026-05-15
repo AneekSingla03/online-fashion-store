@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .pd-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .pd-gallery {
+      position: sticky;
+      top: 80px;
+    }
+
+    .pd-main-img {
+      aspect-ratio: 3/4;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--sand);
+      margin-bottom: 12px;
+    }
+
+    .pd-main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pd-thumbs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pd-thumb {
+      width: 68px;
+      height: 84px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      background: var(--sand);
+    }
+
+    .pd-thumb:hover,
+    .pd-thumb.active {
+      border-color: var(--ink);
+    }
+
+    .pd-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pd-info {}
+
+    .pd-brand {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--rust);
+      margin-bottom: 6px;
+    }
+
+    .pd-name {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .pd-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .pd-price-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pd-price {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 700;
+    }
+
+    .pd-old {
+      font-size: 18px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .pd-disc {
+      background: #fdecea;
+      color: var(--rust);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pd-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .size-grid {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .size-btn {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 9px 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: var(--transition);
+      background: none;
+      cursor: pointer;
+    }
+
+    .size-btn:hover,
+    .size-btn.selected {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .pd-actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .pd-actions .btn {
+      flex: 1;
+    }
+
+    .pd-features {
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pd-feature {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .pd-feature-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .pd-tabs {
+      margin-top: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .pd-tab-btns {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 22px;
+    }
+
+    .pd-tab-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: -1.5px;
+    }
+
+    .pd-tab-btn.active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+      font-weight: 700;
+    }
+
+    .pd-tab-content {
+      display: none;
+    }
+
+    .pd-tab-content.active {
+      display: block;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+    }
+
+    .review-card {
+      background: var(--sand);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .review-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .review-av {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--blush);
+      color: var(--rust);
+    }
+
+    @media(max-width:900px) {
+      .pd-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .pd-gallery {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar-mount"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="breadcrumb" style="margin-bottom:24px;">
+        <a href="index.html">Home</a><span class="breadcrumb-sep">›</span>
+        <a href="products.html">Shop</a><span class="breadcrumb-sep">›</span>
+        <span id="pd-breadcrumb-name">Product</span>
+      </div>
+      <div class="pd-layout" id="pd-layout">
+        <div style="text-align:center;padding:60px;color:var(--muted);">Loading product...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">You May Also <em>Like</em></h2>
+        </div>
+      </div>
+      <div class="product-grid" id="related-grid"></div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <div id="cart-sidebar-mount"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/filter.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('');
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    document.getElementById('cart-sidebar-mount').innerHTML = buildCartSidebar();
+
+    const params = new URLSearchParams(window.location.search);
+    const pid = parseInt(params.get('id')) || 1;
+    const product = PRODUCTS.find(p => p.id === pid) || PRODUCTS[0];
+    let selectedSize = '';
+
+    document.title = product.name + ' – StyleHub';
+    document.getElementById('pd-breadcrumb-name').textContent = product.name;
+
+    const disc = Math.round((1 - product.price / product.old) * 100);
+    const stars = '★'.repeat(product.stars) + '☆'.repeat(5 - product.stars);
+    const sizes = product.sizes.map(s =>
+      `<button class="size-btn" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
+    const wished = isWishlisted(product.id);
+
+    document.getElementById('pd-layout').innerHTML = `
+  <div class="pd-gallery">
+    <div class="pd-main-img">
+      <img src="${product.img}" alt="${product.name}" id="main-img"
+        onerror="this.parentNode.style.background='${product.color}';this.remove()">
+    </div>
+    <div class="pd-thumbs">
+      ${[product.img, product.img, product.img].map((src, i) => `
+      <div class="pd-thumb${i === 0 ? ' active' : ''}" onclick="switchImg(this,'${src}')">
+        <img src="${src}" alt="" onerror="this.parentNode.style.background='${product.color}';this.remove()">
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="pd-info">
+    <div class="pd-brand">StyleHub Exclusive</div>
+    <h1 class="pd-name">${product.name}</h1>
+    <div class="pd-rating">
+      <span class="stars" style="font-size:16px;">${stars}</span>
+      <span style="font-size:14px;color:var(--muted);">${product.reviews} reviews</span>
+      <span class="tag tag-green" style="margin-left:4px;">✓ Verified</span>
+    </div>
+    <div class="pd-price-row">
+      <span class="pd-price">₹${product.price.toLocaleString()}</span>
+      <span class="pd-old">₹${product.old.toLocaleString()}</span>
+      <span class="pd-disc">${disc}% OFF</span>
+    </div>
+    <div class="pd-label">Select Size</div>
+    <div class="size-grid" id="size-grid">${sizes}</div>
+    <div style="display:flex;gap:10px;margin-bottom:22px;">
+      <div class="qty-wrap">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <input class="qty-input" id="qty-val" value="1" readonly>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+    <div class="pd-actions">
+      <button class="btn btn-secondary btn-lg" onclick="addProductToCart()">Add to Cart 🛒</button>
+      <button class="btn btn-outline btn-lg" id="wish-btn" onclick="togglePdWish()">
+        ${wished ? '♥ Wishlisted' : '♡ Wishlist'}
+      </button>
+    </div>
+    <a href="checkout.html" class="btn btn-primary btn-full btn-lg" style="margin-bottom:24px;" onclick="addProductToCart()">Buy Now →</a>
+    <div class="pd-features">
+      <div class="pd-feature"><span class="pd-feature-icon">🚚</span><div><b>Free Delivery</b> on orders above ₹999</div></div>
+      <div class="pd-feature"><span class="pd-feature-icon">🔄</span><div><b>Easy Returns</b> within 30 days</div></div>
+      <div class="pd-feature"><span class="pd-feature-icon">✅</span><div><b>Authentic</b> — 100% original products</div></div>
+      <div class="pd-feature"><span class="pd-feature-icon">🔒</span><div><b>Secure Payment</b> — Multiple options</div></div>
+    </div>
+    <div class="pd-tabs">
+      <div class="pd-tab-btns">
+        <button class="pd-tab-btn active" onclick="switchTab(this,'desc')">Description</button>
+        <button class="pd-tab-btn" onclick="switchTab(this,'size-guide')">Size Guide</button>
+        <button class="pd-tab-btn" onclick="switchTab(this,'reviews')">Reviews (${product.reviews})</button>
+      </div>
+      <div class="pd-tab-content active" id="tab-desc">
+        <p>Experience the perfect blend of style and comfort with the <strong>${product.name}</strong>. Crafted with premium quality fabric, this piece is designed to make you look and feel your best for any occasion.</p>
+        <ul style="margin-top:12px;padding-left:20px;list-style:disc;">
+          <li>Premium quality fabric — soft &amp; breathable</li>
+          <li>Available in multiple sizes for the perfect fit</li>
+          <li>Machine washable — easy to care for</li>
+          <li>Versatile — suitable for casual &amp; formal occasions</li>
+        </ul>
+      </div>
+      <div class="pd-tab-content" id="tab-size-guide">
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <tr style="background:var(--sand);"><th style="padding:10px;text-align:left;border:1px solid var(--border);">Size</th><th style="padding:10px;border:1px solid var(--border);">Chest</th><th style="padding:10px;border:1px solid var(--border);">Waist</th><th style="padding:10px;border:1px solid var(--border);">Hip</th></tr>
+          <tr><td style="padding:10px;border:1px solid var(--border);">XS</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">32"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">26"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">35"</td></tr>
+          <tr style="background:var(--sand);"><td style="padding:10px;border:1px solid var(--border);">S</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">34"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">28"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">37"</td></tr>
+          <tr><td style="padding:10px;border:1px solid var(--border);">M</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">36"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">30"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">39"</td></tr>
+          <tr style="background:var(--sand);"><td style="padding:10px;border:1px solid var(--border);">L</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">38"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">32"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">41"</td></tr>
+          <tr><td style="padding:10px;border:1px solid var(--border);">XL</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">40"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">34"</td><td style="padding:10px;border:1px solid var(--border);text-align:center;">43"</td></tr>
+        </table>
+      </div>
+      <div class="pd-tab-content" id="tab-reviews">
+        ${[['Priya S.', '#fce4ec', '#c2185b', 'Absolutely love it! Great quality and fits perfectly.'],
+      ['Rahul G.', '#e3f2fd', '#1565c0', 'Good product, delivery was fast. Will order again!'],
+      ['Anjali M.', '#e8f5e9', '#2e7d32', 'Beautiful design. Exactly as shown in pictures.']].map(([name, bg, col, txt]) => `
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-av" style="background:${bg};color:${col};">${name[0]}</div>
+            <div><b style="font-size:14px;">${name}</b><div class="stars" style="font-size:12px;">★★★★★</div></div>
+          </div>
+          <p style="font-size:14px;color:var(--ink-soft);">${txt}</p>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+
+    function selectSize(btn, s) {
+      selectedSize = s;
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+    let qty = 1;
+    function changeQty(d) {
+      qty = Math.max(1, qty + d);
+      document.getElementById('qty-val').value = qty;
+    }
+    function addProductToCart() {
+      if (!selectedSize) { showToast('⚠️ Please select a size!'); return; }
+      addToCart(product.id, selectedSize, qty);
+    }
+    function togglePdWish() {
+      const inW = toggleWishlist(product.id);
+      document.getElementById('wish-btn').textContent = inW ? '♥ Wishlisted' : '♡ Wishlist';
+    }
+    function switchImg(thumb, src) {
+      document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      const main = document.getElementById('main-img');
+      if (main) main.src = src;
+    }
+    function switchTab(btn, tabId) {
+      document.querySelectorAll('.pd-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.pd-tab-content').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    // Related products
+    const related = PRODUCTS.filter(p => p.cat === product.cat && p.id !== product.id).slice(0, 4);
+    document.getElementById('related-grid').innerHTML = related.map(p => productCardHTML(p)).join('');
+  </script>
+</body>
+
+</html>

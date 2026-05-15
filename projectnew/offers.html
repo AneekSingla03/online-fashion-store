@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offers & Deals – StyleHub</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c0392b'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='20' font-weight='700' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HERO DEALS BANNER ── */
+    .deals-hero {
+      background: linear-gradient(135deg, #111 0%, #2c1a0e 100%);
+      padding: 64px 48px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .deals-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 98, 47, 0.15) 0%, transparent 70%);
+      right: -100px;
+      top: -150px;
+    }
+
+    .deals-hero-text {
+      z-index: 1;
+      max-width: 540px;
+    }
+
+    .deals-hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 98, 47, 0.2);
+      border: 1px solid rgba(201, 98, 47, 0.4);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 18px;
+    }
+
+    .deals-hero-title {
+      font-family: var(--font-display);
+      font-size: 58px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.0;
+      margin-bottom: 16px;
+    }
+
+    .deals-hero-title span {
+      color: var(--rust);
+    }
+
+    .deals-hero-sub {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .deals-hero-stats {
+      display: flex;
+      gap: 28px;
+    }
+
+    .dhs {
+      text-align: center;
+    }
+
+    .dhs-n {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .dhs-l {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* ── TIMER ── */
+    .timer-wrap {
+      z-index: 1;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    .timer-boxes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .timer-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      min-width: 72px;
+      text-align: center;
+    }
+
+    .timer-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .timer-unit {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* ── COUPON CARDS ── */
+    .coupons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 48px;
+    }
+
+    .coupon-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .coupon-top {
+      padding: 20px 20px 16px;
+    }
+
+    .coupon-discount {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--rust);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .coupon-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .coupon-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .coupon-divider {
+      border-top: 2px dashed var(--border);
+      margin: 0 16px;
+      position: relative;
+    }
+
+    .coupon-divider::before,
+    .coupon-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--sand);
+    }
+
+    .coupon-divider::before {
+      left: -26px;
+    }
+
+    .coupon-divider::after {
+      right: -26px;
+    }
+
+    .coupon-bottom {
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .coupon-code {
+      background: var(--sand);
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--ink);
+    }
+
+    .coupon-copy {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rust);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .coupon-copy:hover {
+      text-decoration: underline;
+    }
+
+    .coupon-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--rust);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── DEAL TABS ── */
+    .deal-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .deal-tab {
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: -2px;
+    }
+
+    .deal-tab:hover {
+      color: var(--ink);
+    }
+
+    .deal-tab.active {
+      color: var(--ink);
+      border-bottom-color: var(--rust);
+    }
+
+    /* ── DEAL CATEGORY STRIP ── */
+    .deal-cat-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 28px;
+      scrollbar-width: none;
+    }
+
+    .deal-cat-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .deal-cat-chip {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .deal-cat-chip:hover,
+    .deal-cat-chip.active {
+      background: var(--rust);
+      color: #fff;
+      border-color: var(--rust);
+    }
+
+    /* ── FLASH DEAL CARD (wider discount badge) ── */
+    .flash-badge {
+      position: absolute;
+      top: 11px;
+      left: 11px;
+      background: var(--rust);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 1;
+    }
+
+    /* ── BRAND DEALS ── */
+    .brand-deals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .brand-deal-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand-deal-card:hover {
+      border-color: var(--rust);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .brand-logo-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 auto 12px;
+    }
+
+    .brand-deal-name {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .brand-deal-off {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--rust);
+    }
+
+    .brand-deal-min {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── NEWSLETTER OFFER ── */
+    .offer-nl {
+      background: linear-gradient(135deg, var(--rust), #a84d22);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      color: #fff;
+      margin-top: 48px;
+    }
+
+    .offer-nl h2 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .offer-nl p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .offer-nl-form {
+      display: flex;
+      max-width: 440px;
+      margin: 0 auto;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .offer-nl-input {
+      flex: 1;
+      padding: 13px 18px;
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      font-family: var(--font-body);
+    }
+
+    .offer-nl-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .offer-nl-btn {
+      background: #fff;
+      color: var(--rust);
+      border: none;
+      padding: 13px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .offer-nl-btn:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    @media(max-width:900px) {
+      .deals-hero {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+
+      .deals-hero-title {
+        font-size: 40px;
+      }
+
+      .coupons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-deals-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .timer-boxes {
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="navbar-mount"></div>
+  <div id="marquee-mount"></div>
+
+  <!-- HERO DEALS SECTION -->
+  <div class="deals-hero">
+    <div class="deals-hero-text">
+      <div class="deals-hero-tag">🔥 Limited Time Offers</div>
+      <h1 class="deals-hero-title">Up to <span>60% Off</span><br>on Top Styles</h1>
+      <p class="deals-hero-sub">Don't miss our biggest sale of the season. Handpicked deals on women's, men's, kids' and
+        ethnic wear — every day.</p>
+      <a href="#deals-section" class="btn btn-secondary btn-lg">Explore All Deals →</a>
+      <div class="deals-hero-stats" style="margin-top:32px;">
+        <div class="dhs">
+          <div class="dhs-n">500+</div>
+          <div class="dhs-l">Products on Sale</div>
+        </div>
+        <div class="dhs">
+          <div class="dhs-n">60%</div>
+          <div class="dhs-l">Max Discount</div>
+        </div>
+        <div class="dhs">
+          <div class="dhs-n">₹0</div>
+          <div class="dhs-l">Delivery Above ₹999</div>
+        </div>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-label">Flash Sale Ends In</div>
+      <div class="timer-boxes">
+        <div class="timer-box">
+          <div class="timer-num" id="t-hours">00</div>
+          <div class="timer-unit">Hours</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-num" id="t-mins">00</div>
+          <div class="timer-unit">Mins</div>
+        </div>
+        <div class="timer-box">
+          <div class="timer-num" id="t-secs">00</div>
+          <div class="timer-unit">Secs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUPON CODES -->
+  <section class="section section-sm" style="background:var(--sand);">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Active <em>Coupon Codes</em></h2>
+          <p class="section-sub">Copy and apply at checkout</p>
+        </div>
+      </div>
+      <div class="coupons-grid">
+        <div class="coupon-card">
+          <span class="coupon-badge">New Users</span>
+          <div class="coupon-top">
+            <div class="coupon-discount">20% OFF</div>
+            <div class="coupon-title">Welcome Offer</div>
+            <div class="coupon-desc">20% off on your first order. Min. purchase ₹500. Valid for new users only.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">STYLE20</div>
+            <span class="coupon-copy" onclick="copyCode('STYLE20')">Copy Code</span>
+          </div>
+        </div>
+        <div class="coupon-card">
+          <span class="coupon-badge">Weekend Deal</span>
+          <div class="coupon-top">
+            <div class="coupon-discount">₹200 OFF</div>
+            <div class="coupon-title">Weekend Special</div>
+            <div class="coupon-desc">Flat ₹200 off on orders above ₹1,499. Valid Sat–Sun only.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">WKND200</div>
+            <span class="coupon-copy" onclick="copyCode('WKND200')">Copy Code</span>
+          </div>
+        </div>
+        <div class="coupon-card">
+          <div class="coupon-top">
+            <div class="coupon-discount">15% OFF</div>
+            <div class="coupon-title">Ethnic Wear Sale</div>
+            <div class="coupon-desc">Extra 15% off on all ethnic wear. Min. purchase ₹2,000. No expiry.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">ETHNIC15</div>
+            <span class="coupon-copy" onclick="copyCode('ETHNIC15')">Copy Code</span>
+          </div>
+        </div>
+        <div class="coupon-card">
+          <span class="coupon-badge">App Only</span>
+          <div class="coupon-top">
+            <div class="coupon-discount">₹350 OFF</div>
+            <div class="coupon-title">App Exclusive</div>
+            <div class="coupon-desc">₹350 off when you shop via the StyleHub app. Min. ₹2,000.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">APP350</div>
+            <span class="coupon-copy" onclick="copyCode('APP350')">Copy Code</span>
+          </div>
+        </div>
+        <div class="coupon-card">
+          <div class="coupon-top">
+            <div class="coupon-discount">FREE</div>
+            <div class="coupon-title">Free Shipping</div>
+            <div class="coupon-desc">Free delivery on any order, regardless of cart value. One-time use.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">SHIP4FREE</div>
+            <span class="coupon-copy" onclick="copyCode('SHIP4FREE')">Copy Code</span>
+          </div>
+        </div>
+        <div class="coupon-card">
+          <span class="coupon-badge">Festival</span>
+          <div class="coupon-top">
+            <div class="coupon-discount">25% OFF</div>
+            <div class="coupon-title">Festival Bonanza</div>
+            <div class="coupon-desc">25% off sitewide. Min. purchase ₹3,000. Use during festive season.</div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-bottom">
+            <div class="coupon-code">FESTIVE25</div>
+            <span class="coupon-copy" onclick="copyCode('FESTIVE25')">Copy Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS PRODUCTS -->
+  <section class="section" id="deals-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Today's <em>Best Deals</em></h2>
+          <p class="section-sub" id="deals-count"></p>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="deal-tabs">
+        <button class="deal-tab active" onclick="switchDealTab(this,'all')">All Deals</button>
+        <button class="deal-tab" onclick="switchDealTab(this,'women')">Women</button>
+        <button class="deal-tab" onclick="switchDealTab(this,'men')">Men</button>
+        <button class="deal-tab" onclick="switchDealTab(this,'kids')">Kids</button>
+        <button class="deal-tab" onclick="switchDealTab(this,'ethnic')">Ethnic</button>
+        <button class="deal-tab" onclick="switchDealTab(this,'sports')">Sports</button>
+      </div>
+
+      <!-- CATEGORY CHIPS -->
+      <div class="deal-cat-strip" id="deal-cats"></div>
+
+      <!-- GRID -->
+      <div class="product-grid" id="deals-grid"></div>
+    </div>
+  </section>
+
+  <!-- BRAND DEALS -->
+  <section class="section section-sm" style="background:var(--sand);padding-top:52px;padding-bottom:52px;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Deals by <em>Brand</em></h2>
+          <p class="section-sub">Exclusive discounts from top brands</p>
+        </div>
+      </div>
+      <div class="brand-deals-grid">
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#c9622f;">A</div>
+          <div class="brand-deal-name">Aurelia</div>
+          <div class="brand-deal-off">Up to 40% Off</div>
+          <div class="brand-deal-min">Min. 5 styles</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#1565c0;">F</div>
+          <div class="brand-deal-name">Fabindia</div>
+          <div class="brand-deal-off">Up to 30% Off</div>
+          <div class="brand-deal-min">Ethnic &amp; Casual</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#2e7d32;">W</div>
+          <div class="brand-deal-name">W for Women</div>
+          <div class="brand-deal-off">Up to 50% Off</div>
+          <div class="brand-deal-min">Women's wear</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#8e24aa;">M</div>
+          <div class="brand-deal-name">Manyavar</div>
+          <div class="brand-deal-off">Up to 35% Off</div>
+          <div class="brand-deal-min">Men's ethnic</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#37474f;">L</div>
+          <div class="brand-deal-name">Libas</div>
+          <div class="brand-deal-off">Up to 60% Off</div>
+          <div class="brand-deal-min">Kurtas &amp; sets</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#d81b60;">B</div>
+          <div class="brand-deal-name">Biba</div>
+          <div class="brand-deal-off">Up to 45% Off</div>
+          <div class="brand-deal-min">Indian wear</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#0277bd;">N</div>
+          <div class="brand-deal-name">Nike</div>
+          <div class="brand-deal-off">Up to 25% Off</div>
+          <div class="brand-deal-min">Sports &amp; active</div>
+        </a>
+        <a href="products.html" class="brand-deal-card">
+          <div class="brand-logo-circle" style="background:#bf360c;">P</div>
+          <div class="brand-deal-name">Peter England</div>
+          <div class="brand-deal-off">Up to 40% Off</div>
+          <div class="brand-deal-min">Men's formal</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER OFFER -->
+  <section class="section section-sm">
+    <div class="container">
+      <div class="offer-nl">
+        <h2>Never Miss a Deal</h2>
+        <p>Subscribe and be the first to know about flash sales, exclusive offers, and new arrivals.</p>
+        <div class="offer-nl-form">
+          <input class="offer-nl-input" id="offer-email" type="email" placeholder="Enter your email...">
+          <button class="offer-nl-btn" onclick="subscribeOffers()">Get Deals</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <div id="cart-sidebar-mount"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/filter.js"></script>
+  <script>
+    document.getElementById('navbar-mount').innerHTML = buildNavbar('offers.html');
+    document.getElementById('marquee-mount').innerHTML = buildMarquee();
+    document.getElementById('footer-mount').innerHTML = buildFooter();
+    document.getElementById('cart-sidebar-mount').innerHTML = buildCartSidebar();
+
+    /* ── COUNTDOWN TIMER (8 hours from now) ── */
+    let endTime = new Date().getTime() + 8 * 3600 * 1000 + 24 * 60 * 1000;
+    function tick() {
+      const now = new Date().getTime();
+      const diff = Math.max(0, endTime - now);
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('t-hours').textContent = String(h).padStart(2, '0');
+      document.getElementById('t-mins').textContent = String(m).padStart(2, '0');
+      document.getElementById('t-secs').textContent = String(s).padStart(2, '0');
+      if (diff <= 0) endTime = new Date().getTime() + 8 * 3600 * 1000; // reset
+    }
+    setInterval(tick, 1000);
+    tick();
+
+    /* ── DEALS PRODUCTS ── */
+    let currentDealCat = 'all';
+
+    // Only show products with a badge (sale items) — or all if not enough
+    const saleProducts = PRODUCTS.filter(p => p.badge === 'sale' || p.badge === 'hot' || p.old > p.price);
+
+    function renderDeals(cat) {
+      const list = cat === 'all' ? saleProducts : saleProducts.filter(p => p.cat === cat);
+      document.getElementById('deals-count').textContent = `Showing ${list.length} deal${list.length !== 1 ? 's' : ''}`;
+      document.getElementById('deals-grid').innerHTML = list.map(p => {
+        const disc = Math.round((1 - p.price / p.old) * 100);
+        const stars = '★'.repeat(p.stars) + '☆'.repeat(5 - p.stars);
+        const wished = isWishlisted(p.id);
+        return `
+    <div class="product-card" data-id="${p.id}">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"
+          onerror="this.style.background='${p.color}';this.style.minHeight='200px';this.removeAttribute('src')">
+        <div class="flash-badge">-${disc}%</div>
+        <button class="product-wish${wished ? ' active' : ''}" onclick="handleWish(event,${p.id})">${wished ? '♥' : '♡'}</button>
+        <button class="product-quick-add" onclick="handleQuickAdd(event,${p.id})">Quick Add +</button>
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.sub}</div>
+        <a href="product-details.html?id=${p.id}"><div class="product-name">${p.name}</div></a>
+        <div class="product-stars">${stars} <span>(${p.reviews})</span></div>
+        <div class="product-price-row">
+          <div>
+            <span class="product-price">₹${p.price.toLocaleString()}</span>
+            <span class="product-old-price">₹${p.old.toLocaleString()}</span>
+            <span class="product-discount">${disc}% off</span>
+          </div>
+          <button class="product-add-btn" onclick="handleQuickAdd(event,${p.id})">+</button>
+        </div>
+      </div>
+    </div>`;
+      }).join('') || `<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon">🛍️</div><h3>No deals in this category yet</h3><p>Check back soon!</p></div>`;
+    }
+
+    function switchDealTab(btn, cat) {
+      document.querySelectorAll('.deal-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      currentDealCat = cat;
+      renderDeals(cat);
+      renderDealCategoryChips(cat);
+    }
+
+    /* ── CATEGORY CHIPS FOR DEALS ── */
+    const DEAL_CATS = {
+      all: [{ label: 'All Deals', val: '' }, { label: '🔥 Flash Sale', val: 'flash' }, { label: '⭐ Top Rated', val: 'top' }],
+      women: [{ label: 'All Women', val: '' }, { label: 'Dresses', val: 'Dresses' }, { label: 'Sarees', val: 'Sarees' }, { label: 'Tops', val: 'Tops' }],
+      men: [{ label: 'All Men', val: '' }, { label: 'Shirts', val: 'Shirts' }, { label: 'Jackets', val: 'Jackets' }, { label: 'Ethnic', val: 'Ethnic' }],
+      kids: [{ label: 'All Kids', val: '' }, { label: 'Baby', val: 'Baby (0-2y)' }, { label: 'Toddler', val: 'Toddler' }],
+      ethnic: [{ label: 'All Ethnic', val: '' }, { label: 'Sarees', val: 'Sarees' }, { label: 'Lehenga', val: 'Women Ethnic' }, { label: 'Sherwani', val: 'Men Ethnic' }],
+      sports: [{ label: 'All Sports', val: '' }, { label: 'Activewear', val: 'Activewear' }, { label: 'Yoga', val: 'Yoga' }],
+    };
+
+    function renderDealCategoryChips(cat) {
+      const chips = DEAL_CATS[cat] || DEAL_CATS.all;
+      document.getElementById('deal-cats').innerHTML = chips.map((c, i) =>
+        `<button class="deal-cat-chip${i === 0 ? ' active' : ''}" onclick="filterDealChip(this,'${c.val}')">${c.label}</button>`
+      ).join('');
+    }
+
+    function filterDealChip(btn, sub) {
+      document.querySelectorAll('.deal-cat-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      let list = currentDealCat === 'all' ? saleProducts : saleProducts.filter(p => p.cat === currentDealCat);
+      if (sub) list = list.filter(p => p.sub === sub);
+      document.getElementById('deals-count').textContent = `Showing ${list.length} deal${list.length !== 1 ? 's' : ''}`;
+      document.getElementById('deals-grid').innerHTML = list.map(p => productCardHTML(p)).join('') ||
+        `<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-icon">🛍️</div><h3>No deals here</h3></div>`;
+    }
+
+    /* ── COPY COUPON ── */
+    function copyCode(code) {
+      navigator.clipboard.writeText(code).then(() => showToast(`✅ Coupon "${code}" copied!`, 'success')).catch(() => {
+        showToast(`Code: ${code} — copy it manually.`);
+      });
+    }
+
+    /* ── SUBSCRIBE ── */
+    function subscribeOffers() {
+      const v = document.getElementById('offer-email').value.trim();
+      if (!v || !v.includes('@')) { showToast('⚠️ Enter a valid email!'); return; }
+      showToast('🎉 Subscribed! You\'ll get the best deals first.', 'success');
+      document.getElementById('offer-email').value = '';
+    }
+
+    // Init
+    renderDeals('all');
+    renderDealCategoryChips('all');
+  </script>
+</body>
+
+</html>
